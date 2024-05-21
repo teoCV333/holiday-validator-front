@@ -7,7 +7,7 @@
 <div class="content" role="main">
 
   <!-- Validar por Fecha -->
-  <div class="validate-section">
+  <div class="validate-section-2">
     <h2>Validar por fecha</h2>
     <div class="validate-date">
       <input placeholder="Select a date" type="date" #dateInput />
@@ -15,7 +15,6 @@
     </div>
   </div>
 
-  <hr>
 
   <!-- Validar por Año -->
   <div class="validate-section">
@@ -29,7 +28,7 @@
     </div>
 
     <div class="table-container">
-      <table mat-table [dataSource]="holidays">
+      <table mat-table [dataSource]="dataSource">
         <!-- Columnas de la tabla -->
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef>Nombre</th>
@@ -48,7 +47,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-
+      <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
   </div>
 
 </div>
