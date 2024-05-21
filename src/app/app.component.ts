@@ -51,15 +51,21 @@ export class AppComponent implements OnInit, AfterViewInit {
     const month = date.getMonth() + 1;
     const day = date.getDate() + 1;
 
-    this.http.get(`${this.apiUrl}/verificar/${year}/${month}/${day}`, { responseType: 'text' })
+    try {
+      this.http.get(`${this.apiUrl}/verificar/${year}/${month}/${day}`, { responseType: 'text' })
       .pipe(catchError(error => {
-        console.error('Error:', error);
         return of('Error en la verificación de la fecha');
       }))
       .subscribe(res => {
+        if(res === 'Error en la verificación de la fecha') {
+          return this.showSnackBar(res);
+        };
         const message = res === 'no es festivo!!' ? 'No es festivo!!' : 'Si es festivo!!';
         this.showSnackBar(message);
-      });
+    });
+    } catch (error) {
+      return this.showSnackBar("Error del servidor");
+    }
   }
 
   validateYear(yearSelect: HTMLSelectElement) {
