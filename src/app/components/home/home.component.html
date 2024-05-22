@@ -4,7 +4,7 @@
     <div class="validate-section-2">
         <h2>Validar por fecha</h2>
         <div class="validate-date">
-            <input placeholder="Select a date" type="date" #dateInput />
+            <input placeholder="Select a date" type="date" #dateInput (keydown)="disableKeyboardInput($event)"/>
             <button (click)="validateDate(dateInput.value)">Validar</button>
         </div>
     </div>
